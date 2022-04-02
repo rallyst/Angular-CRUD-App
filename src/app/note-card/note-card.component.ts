@@ -2,8 +2,10 @@ import {
   AfterViewInit,
   Component, 
   ElementRef, 
+  EventEmitter, 
   Input, 
   OnInit, 
+  Output, 
   Renderer2, 
   ViewChild 
 } from '@angular/core';
@@ -17,6 +19,9 @@ export class NoteCardComponent implements OnInit, AfterViewInit{
 
   @Input() title!: string;
   @Input() body!: string;
+  @Input() link!: string;
+
+  @Output('delete') deleteEvent: EventEmitter<void> = new EventEmitter<void>();
 
   @ViewChild('truncator', { static: true}) truncator!: ElementRef<HTMLElement>;
   @ViewChild('bodyText', { static: true}) bodyText!: ElementRef<HTMLElement>;
@@ -37,8 +42,10 @@ export class NoteCardComponent implements OnInit, AfterViewInit{
     } 
   }
 
+  onXButtonClick() {
+    this.deleteEvent.emit();
+  }
+
 }
-function Import() {
-  throw new Error('Function not implemented.');
-}
+
 
